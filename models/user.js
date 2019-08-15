@@ -23,6 +23,11 @@ var mySchema = new schema({
 	},
 	phone: {
 		type: Number,
+		get: (v) => Math.floor(v),
+		set: (v) => Math.floor(v),
+		// validate: {
+		// 	vali
+		// },
 		required: [true, 'Need your stupid number mate.'],
 	},
 	amount: {
