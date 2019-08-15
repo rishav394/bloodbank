@@ -49,7 +49,8 @@
 		<div class="row container" id="searcher" style="display: none; margin-top: 2rem;">
 			<form action="/bank" autocomplete="off">
 				<div class="col l6 m6 s12 input-field">
-					<input type="text" name="blood" pattern="\w[+.-]" placeholder="Blood Group" id="blood" class="validate">
+					<input type="text" name="blood" pattern="(A|B|AB|O)[+-]" placeholder="Blood Group" id="blood"
+						class="validate">
 					<label for="blood">Blood Group</label>
 				</div>
 				<div class="col l6 m6 s12 input-field">

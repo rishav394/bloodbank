@@ -35,33 +35,41 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-	userModel.findOne({ name: req.body.name }).then((user) => {
-		if (user == null) {
-			new userModel({
-				name: req.body.name,
-				bloodGroup: req.body.blood,
-				city: req.body.city,
-				phone: req.body.phone,
-			})
-				.save()
-				.then((user) => {
-					res.cookie('user', user.name, {
-						signed: dburi,
-						maxAge: 7 * 24 * 3400,
-					});
-					res.redirect('/donate');
+	userModel
+		.findOne({ name: req.body.name })
+		.then((user) => {
+			if (user == null) {
+				new userModel({
+					name: req.body.name.toUpperCase(),
+					bloodGroup: req.body.blood.toUpperCase(),
+					city: req.body.city.toUpperCase(),
+					phone: req.body.phone,
+					amount: req.body.amount || 0,
 				})
-				.catch((err) => {
-					res.send(err.message + '\nPlease go Back and try again.');
+					.save()
+					.then((user) => {
+						res.cookie('user', user.name, {
+							signed: dburi,
+							maxAge: 7 * 24 * 3400,
+						});
+						res.redirect('/donate');
+					})
+					.catch((err) => {
+						res.send(
+							err.message + '\nPlease go Back and try again.',
+						);
+					});
+			} else {
+				res.cookie('user', user.name, {
+					signed: dburi,
+					maxAge: 864000,
 				});
-		} else {
-			res.cookie('user', user.name, {
-				signed: dburi,
-				maxAge: 864000,
-			});
-			res.redirect('/donate');
-		}
-	});
+				res.redirect('/donate');
+			}
+		})
+		.catch((err) => {
+			res.send(err.message);
+		});
 });
 
 app.post('/donate', (req, res) => {
