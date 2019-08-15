@@ -23,6 +23,10 @@
 			.mynav {
 				background-color: rgb(244, 76, 64)
 			}
+
+			div.card div.card-content {
+				padding-bottom: 0.1em;
+			}
 		</style>
 
 	</head>
@@ -31,8 +35,8 @@
 		<!-- Nav -->
 		<nav class="mynav">
 			<div class="nav-wrapper container">
-				<a href="/"><img src="bbi-logo.png" alt="Universe" class="brand-logo">
-				</a>
+				<a href="/"><img src="bbi-logo.png" alt="Universe" class="brand-logo"></a>
+				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a id="hider" class="btn-floating waves-effect waves-light transparent"><i
 								class="material-icons">search</i></a>
@@ -44,6 +48,38 @@
 				</ul>
 			</div>
 		</nav>
+		<ul class="sidenav" id="mobile-demo">
+			<li>
+				<div class="row container" style="margin-top: 2rem;">
+					<form action="/bank" autocomplete="off">
+						<div class="col l6 m6 s12 input-field">
+							<input type="text" name="blood" pattern="(A|B|AB|O)[+-]" placeholder="Blood Group" id="blood"
+								class="validate">
+							<label for="blood">Blood Group</label>
+						</div>
+						<div class="col l6 m6 s12 input-field">
+							<input type="text" name="city" placeholder="City" id="city" class="validate">
+							<label for="city">City</label>
+						</div>
+						<div class="col l12 s12 m12 center">
+							<label>
+								<input type="checkbox" checked="checked" name="zeros" />
+								<span>Include Zeros</span>
+							</label>
+						</div>
+						<div class="col l12 s12 m12 center">
+							<button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
+									class="material-icons">search</i></button>
+						</div>
+					</form>
+				</div>
+			</li>
+			<li><a class="btn red" href="/donate">Donate</a></li>
+			<% if(logged){ %>
+			<li><a class="btn red" href="/logout">Logout</a></li>
+			<% } %>
+		</ul>
+
 
 		<!-- Search -->
 		<div class="row container" id="searcher" style="display: none; margin-top: 2rem;">
@@ -76,7 +112,7 @@
 			<div class="col s12 m6 l4">
 				<div class="card red darken-1">
 					<div class="card-content white-text">
-						<span class="card-title"><%= doc.name %></span>
+						<span class="card-title flow-text"><%= doc.name %></span>
 						<div class="row">
 							<span class="col l6 m6 s6">Blood Group </span>
 							<span class="col l6 m6 s6"><%= doc.bloodGroup %></span>
@@ -87,7 +123,7 @@
 						</div>
 					</div>
 					<div class="card-action">
-						<a href="tel:<%= doc.phone %>">Call me!</a>
+						<a href="tel:<%= doc.phone %>" class="white-text"><i class="material-icons right">phone</i>Call me!</a>
 					</div>
 				</div>
 			</div>
@@ -95,18 +131,21 @@
 		</div>
 
 
-		<script src="materialize.min.js"></script>
 		<script src="jquery.min.js"></script>
+		<script src="materialize.min.js"></script>
 		<script>
 			$('input').on('keyup', function () {
 				this.value = this.value.toUpperCase();
 			})
 			var a = [ 'search', 'delete' ]
 			var i = 1;
-			$("#hider").click(function () {
-				$("#searcher").toggle(400);
-				$(this).html('<i class= "material-icons" >' + a[ i++ % 2 ] + '</i >')
-			});
+			$(document).ready(function () {
+				$("#hider").click(function () {
+					$("#searcher").toggle(400);
+					$(this).html('<i class= "material-icons" >' + a[ i++ % 2 ] + '</i >')
+				});
+				$('.sidenav').sidenav();
+			})
 		</script>
 	</body>
 

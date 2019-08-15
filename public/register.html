@@ -40,12 +40,19 @@
 		<nav class="mynav">
 			<div class="nav-wrapper container">
 				<a href="/"><img src="bbi-logo.png" alt="Universe" class="brand-logo"></a>
+				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a class="btn transparent" href="/donate">Donate</a></li>
-					<li><a class="btn transparent" href="/bank">Check Donors</a></li>
+					<li><a class="btn transparent" href="/bank?blood=&city=&zeros=on">Check Donors</a></li>
 				</ul>
 			</div>
 		</nav>
+
+		<ul class="sidenav" id="mobile-demo">
+			<li><a class="btn red" href="/donate">Donate</a></li>
+			<li><a class="btn red" href="/bank?blood=&city=&zeros=on">Search Donors</a></li>
+		</ul>
+
 
 		<!-- Crap -->
 		<div class="center white-text">
@@ -65,8 +72,8 @@
 				<div class="row">
 					<div class="input-field col s12 l12">
 						<!-- Bloodgroup -->
-						<input class="white-text autocomplete-content" required placeholder="Blood Group" id="blood" name="blood" pattern="(A|B|AB|O)[+-]"
-							type="text" class="validate">
+						<input class="white-text autocomplete-content" required placeholder="Blood Group" id="blood" name="blood"
+							pattern="(A|B|AB|O)[+-]" type="text" class="validate">
 						<label for="blood">Blood Group</label>
 					</div>
 				</div>
@@ -102,13 +109,14 @@
 				<img src="donate.jpg" alt="Donate" class="center">
 			</div>
 		</div>
-		<script src="materialize.min.js"></script>
 		<script src="jquery.min.js"></script>
+		<script src="materialize.min.js"></script>
 		<script>
 			$('input').on('keyup', function () {
 				this.value = this.value.toUpperCase();
 			})
 			$(document).ready(() => {
+				$('.sidenav').sidenav();
 				// $('input.autocomplete-content').autocomplete({
 				// 	data: {
 				// 		"A+": null,
