@@ -3,9 +3,9 @@ const schema = mongoose.Schema;
 var mySchema = new schema({
 	name: {
 		type: String,
-		// Bug :down:
-		// unique: [true, 'A donor with that name and number already exists.'],
 		required: [true, 'Need your stupid name mate.'],
+		uppercase: true,
+		trim: true,
 	},
 	bloodGroup: {
 		type: String,
@@ -16,19 +16,21 @@ var mySchema = new schema({
 			message: (props) => `${props.value} is not a valid Blood Group!`,
 		},
 		required: [true, 'Need your Blood Group.'],
+		uppercase: true,
+		trim: true,
 	},
 	city: {
 		type: String,
 		required: [true, 'Need your city.'],
+		uppercase: true,
+		trim: true,
 	},
 	phone: {
 		type: Number,
 		get: (v) => Math.floor(v),
 		set: (v) => Math.floor(v),
-		// validate: {
-		// 	vali
-		// },
 		required: [true, 'Need your stupid number mate.'],
+		max: 9999999999,
 	},
 	amount: {
 		type: Number,
