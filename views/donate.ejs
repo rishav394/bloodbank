@@ -1,0 +1,105 @@
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="Description"
+			content="Author: Rishav Rungta, Purpose: I made this site as a larning project and will try and use react soon.">
+		<title>BloodBank</title>
+
+		<!-- Compiled latest Css -->
+		<link rel="stylesheet" href="materialize.min.css" />
+
+		<!--Import Google Icon Font-->
+		<link href="icon.css" rel="stylesheet" />
+
+		<style>
+			.brand-logo {
+				height: 90%;
+			}
+
+			.mynav {
+				background-color: rgb(244, 76, 64)
+			}
+
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				/* display: none; <- Crashes Chrome on hover */
+				-webkit-appearance: none;
+				margin: 0;
+				/* <-- Apparently some margin are still there even though it's hidden */
+			}
+
+			input[type=number] {
+				-moz-appearance: textfield;
+				/* Firefox */
+			}
+
+			input {
+				outline: 0;
+				border-width: 0 0 2px;
+			}
+
+			input:focus {
+				border-color: rgb(209, 69, 59)
+			}
+
+			input#amount {
+				color: red;
+				font-size: 6rem;
+				text-align: center;
+			}
+
+			span.red-text {
+				height: auto;
+				font-size: 6rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Nav -->
+		<nav class="mynav">
+			<div class="nav-wrapper container">
+				<img src="bbi-logo.png" alt="Universe" class="brand-logo">
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a class="btn transparent" href="/bank">Check Donors</a></li>
+					<li><a class="btn transparent" href="/logout">Log Out</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Crap -->
+		<div class="center flow-text">
+			<h4>Welcome <%= user.name %>. </h4>
+			<p>You have donated <%= user.amount %> Pint blood so far.</p>
+		</div>
+		<div class="row center">
+			<form action="/donate" method="post" id="amountForm">
+				<input required id="amount" name="amount" type="number" max="5" value="0" class="browser-default">
+				<span class="red-text">P</span><br>
+				<a onclick="document.getElementById('amountForm').submit();"
+					class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+			</form>
+		</div>
+
+
+		<script src="materialize.min.js"></script>
+		<script src="jquery.min.js"></script>
+		<script>
+			var input = document.querySelector('input'); // get the input element
+			input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+			resizeInput.call(input); // immediately call the function
+
+			function resizeInput() {
+				if (this.value > 5) {
+					this.value = 5
+				}
+				if (this.value.length >= 1)
+					this.style.width = this.value.length + 0.5 + "ch";
+			}
+		</script>
+	</body>
+
+</html>

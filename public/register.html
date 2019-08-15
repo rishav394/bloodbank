@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="Description"
+			content="Author: Rishav Rungta, Purpose: I made this site as a larning project and will try and use react soon.">
+		<title>BloodBank</title>
+
+		<!-- Compiled latest Css -->
+		<link rel="stylesheet" href="materialize.min.css" />
+
+		<!--Import Google Icon Font-->
+		<link href="icon.css" rel="stylesheet" />
+
+		<style>
+			.brand-logo {
+				height: 90%;
+			}
+
+			.mynav {
+				background-color: rgba(252, 34, 49, 0.979)
+			}
+
+			body {
+				background-color: rgb(229, 22, 38)
+			}
+
+			.row {
+				margin-bottom: 6px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- Nav -->
+		<nav class="mynav">
+			<div class="nav-wrapper container">
+				<a href="/"><img src="bbi-logo.png" alt="Universe" class="brand-logo"></a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a class="btn transparent" href="/donate">Donate</a></li>
+					<li><a class="btn transparent" href="/bank">Check Donors</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Crap -->
+		<div class="center white-text">
+			<h4>Create A Donation Profile</h4>
+		</div>
+		<div class="row container" style="margin-top: 20px;">
+			<form class="col s12 l5" action="/register" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="input-field col l12 s12">
+						<!-- Name -->
+						<input class="white-text" required placeholder="Name" id="first_name" name="name" type="text"
+							class="validate">
+						<label for="first_name">Name</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12 l12">
+						<!-- Bloodgroup -->
+						<input class="white-text autocomplete-content" required placeholder="Blood Group" id="blood" name="blood"
+							type="text" class="validate">
+						<label for="blood">Blood Group</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12 l12">
+						<!-- Phone -->
+						<input class="white-text" required placeholder="Contact Number" id="phone" name="phone" type="number"
+							class="validate">
+						<label for="phone">Phone</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12 l12">
+						<!-- City -->
+						<input class="white-text" required placeholder="Kaha se hai bhadwe?" id="city" name="city" type="text"
+							class="validate">
+						<label for="city">City</label>
+					</div>
+				</div>
+				<div class="center">
+					<label>
+						<input type="checkbox" checked="checked" required />
+						<span>I confirm that I am atleast 18 years old.</span><br>
+					</label>
+					<button class="btn waves-effect waves-light" type="submit" name="action">Register
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</form>
+			<div class="col l6 hide-on-med-and-down offset-l1 center">
+				<img src="donate.jpg" alt="Donate" class="center">
+			</div>
+		</div>
+		<script src="materialize.min.js"></script>
+		<script src="jquery.min.js"></script>
+		<script>
+			$('input').on('keyup', function () {
+				this.value = this.value.toUpperCase();
+			})
+			$(document).ready(() => {
+				// $('input.autocomplete-content').autocomplete({
+				// 	data: {
+				// 		"A+": null,
+				// 		"B+": null,
+				// 		"AB+": null,
+				// 		"O+": null,
+				// 		"A-": null,
+				// 		"B-": null,
+				// 		"AB-": null,
+				// 		"O-": null
+				// 	},
+				// });
+			})
+
+		</script>
+	</body>
+
+</html>
