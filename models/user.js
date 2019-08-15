@@ -9,8 +9,13 @@ var mySchema = new schema({
 	},
 	bloodGroup: {
 		type: String,
-		enum: ['A-', 'B-', 'AB-', 'O-', 'A+', 'B+', 'AB+', 'O+'],
-		required: [true, 'Need your stupic name bro.'],
+		validate: {
+			validator: function(v) {
+				return /(A|B|AB|O)[+-]/.test(v);
+			},
+			message: (props) => `${props.value} is not a valid Blood Group!`,
+		},
+		required: [true, 'Need your Blood Group.'],
 	},
 	city: {
 		type: String,
@@ -23,6 +28,13 @@ var mySchema = new schema({
 	amount: {
 		type: Number,
 		default: 0,
+		validate: {
+			validator: function(v) {
+				return v >= 0;
+			},
+			message: (props) =>
+				`${props.value} is not a valid amount to Donate!`,
+		},
 	},
 });
 

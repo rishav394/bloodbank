@@ -73,10 +73,20 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/donate', (req, res) => {
+	if (req.body.amount == undefined || req.body.amount <= 0) {
+		res.redirect('back');
+		return;
+	}
 	userModel.findOne({ name: req.signedCookies.user }, function(err, doc) {
 		if (err) res.send(err);
 		doc.amount += parseFloat(req.body.amount);
-		doc.save().then(res.redirect('/donate'));
+		doc.save({
+			validateBeforeSave: true,
+		})
+			.then(res.redirect('/donate'))
+			.catch((err) => {
+				res.send(err.message);
+			});
 	});
 });
 
@@ -109,14 +119,18 @@ app.get('/donate', (req, res) => {
 });
 
 app.get('/bank', (req, res) => {
-	var query = {};
-	if (req.query.blood || req.query.city)
-		query = {
-			$and: [
-				{ bloodGroup: { $regex: req.query.blood, $options: 'i' } },
-				{ city: { $regex: req.query.city, $options: 'i' } },
-			],
-		};
+	if (req.query.blood == undefined) req.query.blood = '';
+	if (req.query.city == undefined) req.query.city = '';
+	if (req.query.zeros == undefined) req.query.zeros = 0;
+	else req.query.zeros = -1;
+
+	var query = {
+		$and: [
+			{ bloodGroup: { $regex: req.query.blood, $options: 'i' } },
+			{ city: { $regex: req.query.city, $options: 'i' } },
+			{ amount: { $ne: req.query.zeros } },
+		],
+	};
 	userModel.find(query, function(err, docs) {
 		if (err) res.send(err);
 		res.render('bank', { docs: docs, logged: req.signedCookies.user });
