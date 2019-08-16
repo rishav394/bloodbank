@@ -6,6 +6,14 @@
 	background-color: rgba(252, 34, 49, 0.979);
 }
 
+footer {
+	margin-top: 30px;
+}
+
+body footer.page-footer {
+	background-color: rgba(252, 34, 49, 0.979);
+}
+
 body {
 	background-color: rgb(229, 22, 38);
 }

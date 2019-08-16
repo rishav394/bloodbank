@@ -2,7 +2,8 @@
 	height: 90%;
 }
 
-.mynav {
+.mynav,
+body footer.page-footer {
 	background-color: rgba(252, 34, 49, 0.979);
 }
 
