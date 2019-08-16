@@ -1,0 +1,31 @@
+.brand-logo {
+	height: 90%;
+}
+
+.mynav {
+	background-color: rgba(252, 34, 49, 0.979);
+}
+
+body {
+	background-color: rgb(229, 22, 38);
+}
+
+.row {
+	margin-bottom: 2px;
+}
+
+h3 {
+	color: #9f190c;
+}
+
+div.card div.card-content {
+	padding-bottom: 0.1em;
+}
+
+select {
+	display: inherit;
+}
+
+#final {
+	margin-top: 10px;
+}

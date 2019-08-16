@@ -11,12 +11,18 @@ const KEY = 'Happy holi same to you.';
 var dburi =
 	'mongodb://rishav394:Pp%409845097056@ds263127.mlab.com:63127/bloodbank';
 
+const escapeRegExp = (string) => {
+	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+};
+
 mongoose.connect(dburi, { useNewUrlParser: true }, (err) => {
 	if (err) console.log(err);
 	else console.log('Connected to mongoDb');
 });
 
-app.use(express.static('public'));
+app.use(express.static('public/js'));
+app.use(express.static('public/css'));
+app.use(express.static('public/img'));
 app.use(cookieParser(KEY));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
@@ -27,7 +33,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-	res.sendFile('index.html');
+	res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.get('/register', (req, res) => {
@@ -41,10 +47,11 @@ app.post('/register', (req, res) => {
 			if (user == null) {
 				new userModel({
 					name: req.body.name.toUpperCase(),
-					bloodGroup: req.body.blood.toUpperCase(),
+					bloodGroup: req.body.blood.toUpperCase() + req.body.rh,
 					city: req.body.city.toUpperCase(),
 					phone: req.body.phone,
 					amount: req.body.amount || 0,
+					address: req.body.address,
 				})
 					.save()
 					.then((user) => {
@@ -119,16 +126,25 @@ app.get('/donate', (req, res) => {
 });
 
 app.get('/bank', (req, res) => {
-	if (req.query.blood == undefined) req.query.blood = '';
+	if (req.signedCookies.user == null) {
+		res.redirect('/register');
+		return;
+	}
+	if (req.query.blood == undefined || req.query.blood == '') {
+		req.query.blood = '';
+		if (req.query.rh != undefined) {
+			req.query.blood += escapeRegExp(req.query.rh);
+		}
+	}
 	if (req.query.city == undefined) req.query.city = '';
-	if (req.query.zeros == undefined) req.query.zeros = 0;
-	else req.query.zeros = -1;
+	// if (req.query.zeros == undefined) req.query.zeros = 0;
+	// else req.query.zeros = -1;
 
 	var query = {
 		$and: [
 			{ bloodGroup: { $regex: req.query.blood, $options: 'i' } },
 			{ city: { $regex: req.query.city, $options: 'i' } },
-			{ amount: { $ne: req.query.zeros } },
+			// { amount: { $ne: req.query.zeros } },
 		],
 	};
 	userModel.find(query, function(err, docs) {

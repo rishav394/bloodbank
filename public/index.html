@@ -13,19 +13,7 @@
 
 		<!--Import Google Icon Font-->
 		<link href="icon.css" rel="stylesheet" />
-		<style>
-			.brand-logo {
-				height: 90%;
-			}
-
-			.mynav {
-				background-color: rgb(244, 76, 64)
-			}
-
-			h3 {
-				color: #9F190C;
-			}
-		</style>
+		<link rel="stylesheet" href="home_style.css">
 	</head>
 
 	<body>
@@ -35,13 +23,13 @@
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a class="btn transparent" href="/donate">Donate</a></li>
-					<li><a class="btn transparent" href="/bank?blood=&city=&zeros=on">Search Donors</a></li>
+					<li><a class="btn transparent" href="/bank">Search Donors</a></li>
 				</ul>
 			</div>
 		</nav>
 		<ul class="sidenav" id="mobile-demo">
 			<li><a class="btn red" href="/donate">Donate</a></li>
-			<li><a class="btn red" href="/bank?blood=&city=&zeros=on">Search Donors</a></li>
+			<li><a class="btn red" href="/bank">Search Donors</a></li>
 		</ul>
 
 		<div class="center responsive-img">
@@ -148,10 +136,6 @@
 
 	<script src="jquery.min.js"></script>
 	<script src="materialize.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('.sidenav').sidenav();
-		});
-	</script>
+	<script src="register_script.js"></script>
 
 </html>

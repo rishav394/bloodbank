@@ -15,23 +15,7 @@
 		<!--Import Google Icon Font-->
 		<link href="icon.css" rel="stylesheet" />
 
-		<style>
-			.brand-logo {
-				height: 90%;
-			}
-
-			.mynav {
-				background-color: rgba(252, 34, 49, 0.979)
-			}
-
-			body {
-				background-color: rgb(229, 22, 38)
-			}
-
-			.row {
-				margin-bottom: 6px;
-			}
-		</style>
+		<link rel="stylesheet" href="style.css">
 
 	</head>
 
@@ -43,7 +27,7 @@
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a class="btn transparent" href="/donate">Donate</a></li>
-					<li><a class="btn transparent" href="/bank?blood=&city=&zeros=on">Check Donors</a></li>
+					<li><a class="btn transparent" href="/bank">Check Donors</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -56,52 +40,88 @@
 
 		<!-- Crap -->
 		<div class="center white-text">
-			<h4>Create A Donation Profile</h4>
+			<h4>Create or Log in to a profile to continue</h4>
 		</div>
 		<div class="row container" style="margin-top: 20px;">
-			<form class="col s12 l5" action="/register" method="POST" autocomplete="off">
+			<form class="col s12 l5 white-text" action="/register" method="POST" autocomplete="new-password">
 				<div class="row">
 					<div class="input-field col l12 s12">
 						<!-- Name -->
-						<input class="white-text" required placeholder="Name" id="first_name" name="name" type="text"
-							class="validate">
-						<label for="first_name">Name</label>
+						<label class="white-text" for="">Name</label>
+						<input autocomplete="new-password" class="white-text" required placeholder="Name" id="first_name"
+							name="name" type="text" class="validate">
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="input-field col s12 l12">
-						<!-- Bloodgroup -->
-						<input class="white-text autocomplete-content" required placeholder="Blood Group" id="blood" name="blood"
-							pattern="(A|B|AB|O)[+-]" type="text" class="validate">
-						<label for="blood">Blood Group</label>
+					<div class="col s12 m4 l4">
+						<label class="white-text" for="blood">Blood Group</label>
+						<select name="blood" id="blood" class="validate" required>
+							<option value="">Select</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="O">O</option>
+							<option value="AB">AB</option>
+						</select>
+					</div>
+					<div class="col s12 m8 l8">
+						<label class="white-text" for="rh">Rh Factor</label>
+						<p class=" white-text">
+							<label>
+								<input class="with-gap white-text white" value="+" name="rh" type="radio" required />
+								<span class="white-text">Positive</span>
+							</label>
+							<label>
+								<input class="with-gap white-text white" value="-" name="rh" type="radio" required />
+								<span class="white-text">Negetive</span>
+							</label>
+						</p>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="input-field col s12 l12">
 						<!-- Phone -->
-						<input class="white-text" required placeholder="Contact Number" id="phone" name="phone" type="number"
-							class="validate">
-						<label for="phone">Phone</label>
+						<label class="white-text">Phone</label>
+						<input autocomplete="new-password" class="white-text" required placeholder="Contact Number" id="phone"
+							name="phone" type="text" pattern="[789][0-9]{9}" class="validate">
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="input-field col s12 l12">
+					<div class="col s12 l12">
 						<!-- City -->
-						<input class="white-text" required placeholder="Kaha se hai bhadwe?" id="city" name="city" type="text"
-							class="validate">
-						<label for="city">City</label>
+						<label class="white-text" for="city">City</label>
+						<select name="city" id="city" class="validate" required>
+							<option value="">Select</option>
+							<option value="Chennai">Chennai</option>
+							<option value="Tambaram">Tambaram</option>
+							<option value="Adyar">Adyar</option>
+							<option value="Avadi">Avadi</option>
+							<option value="Perambur">Perambur</option>
+							<option value="Ambattur">Ambattur</option>
+							<option value="Velachery">Velachery</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row" id="final">
+					<div class="input-field col s12 l12 m12">
+						<textarea autocomplete="new-password" maxlength="80" id="address" placeholder="Enter your Address"
+							name="address" class="materialize-textarea white-text validate" required></textarea>
+						<label for="address" class="white-text">Address</label>
 					</div>
 				</div>
 				<div class="center">
-					<label>
+					<label class="white-text">
 						<input type="checkbox" checked="checked" required />
-						<span>I confirm that I am atleast 18 years old.</span><br>
+						<span class="white-text">I confirm that I am atleast 18 years old.</span><br>
 					</label>
-					<button class="btn waves-effect waves-light" type="submit" name="action">Register
+					<button class="btn waves-effect waves-light red lighten-1" type="submit">Register
 						<i class="material-icons right">send</i>
+					</button>
+					<button class="btn waves-effect waves-light red lighten-1" type="reset">Reset
+						<i class="material-icons right">delete</i>
 					</button>
 				</div>
 			</form>
@@ -111,27 +131,7 @@
 		</div>
 		<script src="jquery.min.js"></script>
 		<script src="materialize.min.js"></script>
-		<script>
-			$('input').on('keyup', function () {
-				this.value = this.value.toUpperCase();
-			})
-			$(document).ready(() => {
-				$('.sidenav').sidenav();
-				// $('input.autocomplete-content').autocomplete({
-				// 	data: {
-				// 		"A+": null,
-				// 		"B+": null,
-				// 		"AB+": null,
-				// 		"O+": null,
-				// 		"A-": null,
-				// 		"B-": null,
-				// 		"AB-": null,
-				// 		"O-": null
-				// 	},
-				// });
-			})
-
-		</script>
+		<script src="register_script.js"></script>
 	</body>
 
 </html>

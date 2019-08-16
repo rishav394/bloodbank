@@ -1,0 +1,40 @@
+.brand-logo {
+	height: 90%;
+}
+
+.mynav {
+	background-color: rgb(244, 76, 64);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0;
+	/* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+	/* Firefox */
+}
+
+input {
+	outline: 0;
+	border-width: 0 0 2px;
+}
+
+input:focus {
+	border-color: rgb(209, 69, 59);
+}
+
+input#amount {
+	color: red;
+	font-size: 6rem;
+	text-align: center;
+}
+
+span.red-text {
+	height: auto;
+	font-size: 6rem;
+}
