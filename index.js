@@ -17,10 +17,14 @@ const escapeRegExp = (string) => {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
-mongoose.connect(dburi, { useNewUrlParser: true }, (err) => {
-	if (err) throw err;
-	else console.log('Connected to mongoDb');
-});
+mongoose.connect(
+	dburi,
+	{ useNewUrlParser: true, useCreateIndex: true },
+	(err) => {
+		if (err) throw err;
+		else console.log('Connected to mongoDb');
+	},
+);
 
 app.use(express.static('public/js'));
 app.use(express.static('public/css'));
@@ -132,12 +136,14 @@ app.get('/bank', (req, res) => {
 		res.redirect('/register');
 		return;
 	}
-	if (req.query.blood == undefined || req.query.blood == '') {
-		req.query.blood = '';
-		if (req.query.rh != undefined) {
-			req.query.blood += escapeRegExp(req.query.rh);
-		}
-	}
+
+	if (req.query.blood == undefined || req.query.blood == '')
+		req.query.blood = '(A|B|O|AB)';
+
+	if (req.query.rh != undefined)
+		req.query.blood += escapeRegExp(req.query.rh);
+	else req.query.blood += '[\\+-]';
+
 	if (req.query.city == undefined) req.query.city = '';
 
 	var query = {

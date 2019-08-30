@@ -4,6 +4,10 @@
 	"description": "IWP DA1",
 	"main": "index.js",
 	"author": "17bce2374",
+	"scripts": {
+		"start": "node index.js",
+		"populate": "node util/populator.js"
+	},
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.19.0",

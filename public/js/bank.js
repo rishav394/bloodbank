@@ -5,7 +5,8 @@ var a = ['search', 'delete'];
 var i = 1;
 $(document).ready(function() {
 	new URL(window.location.href).searchParams.forEach((x, y) => {
-		document.getElementsByName(y).forEach((p) => (p.value = x));
+		if (y != 'rh')
+			document.getElementsByName(y).forEach((p) => (p.value = x));
 	});
 	$('#hider').click(function() {
 		$('#searcher').toggle(400);

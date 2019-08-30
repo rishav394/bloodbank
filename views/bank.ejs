@@ -127,17 +127,19 @@
 				<p class="white-text flow-text">No Donors with that criteria found. Please redefine your
 					search.</p>
 			</div>
-			<%} else {%>
+			<%} else { %>
 			<% docs.forEach((doc)=>{ %>
 			<div class="col s12 m6 l4">
 				<div class="card red darken-1">
 					<div class="card-content white-text">
-						<span class="card-title flow-text"><%= doc.name %></span>
+						<span class="card-title flow-text">
+							<!-- <i class="material-icons">sentiment_very_satisfied</i> -->
+							<%= doc.name.substr(0,25) %></span>
 						<div class="row">
 							<span class="col l6 m6 s6">Blood Group </span>
 							<span class="col l6 m6 s6"><%= doc.bloodGroup %></span>
 							<span class="col l6 m6 s6">City of Donation </span>
-							<span class="col l6 m6 s6"><%= doc.city %></span>
+							<span class="col l6 m6 s6"><%= doc.city.substr(0,18) %></span>
 							<span class="col l6 m6 s6">Amount of blood </span>
 							<span class="col l6 m6 s6"><%= doc.amount %> Pint</span>
 						</div>

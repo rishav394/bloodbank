@@ -36,6 +36,7 @@ var mySchema = new schema(
 			},
 			required: [true, 'Need your stupid number mate.'],
 			max: 9999999999,
+			unique: true,
 		},
 		amount: {
 			type: Number,
