@@ -8,8 +8,11 @@ var userModel = require('./models/user');
 require('dotenv').config();
 
 const KEY = process.env.KEY;
-var dburi = process.env.DBURI;
-
+const dburi = process.env.DBURI;
+const signature = {
+	signed: KEY,
+	maxAge: 2 * 24 * 60 * 60 * 1000,
+};
 const escapeRegExp = (string) => {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
@@ -55,10 +58,7 @@ app.post('/register', (req, res) => {
 				})
 					.save()
 					.then((user) => {
-						res.cookie('user', user.phone, {
-							signed: KEY,
-							maxAge: 7 * 24 * 3400,
-						});
+						res.cookie('user', user.phone, signature);
 						res.redirect('/donate');
 					})
 					.catch((err) => {
@@ -67,10 +67,7 @@ app.post('/register', (req, res) => {
 						);
 					});
 			} else {
-				res.cookie('user', user.phone, {
-					signed: KEY,
-					maxAge: 7 * 24 * 3400,
-				});
+				res.cookie('user', user.phone, signature);
 				res.redirect('/donate');
 			}
 		})
