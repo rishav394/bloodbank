@@ -29,8 +29,11 @@ var mySchema = new schema(
 		},
 		phone: {
 			type: Number,
-			get: (v) => Math.floor(v),
-			set: (v) => Math.floor(v),
+			validate: {
+				validator: Number.isInteger,
+				message: (props) =>
+					`${props.value} is not a valid phone number!`,
+			},
 			required: [true, 'Need your stupid number mate.'],
 			max: 9999999999,
 		},

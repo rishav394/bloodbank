@@ -37,3 +37,9 @@ select {
 #final {
 	margin-top: 10px;
 }
+
+div div input#phone,
+div div input#first_name,
+div div input#address {
+	margin-bottom: 0;
+}

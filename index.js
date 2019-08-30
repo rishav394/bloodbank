@@ -22,6 +22,7 @@ mongoose.connect(dburi, { useNewUrlParser: true }, (err) => {
 app.use(express.static('public/js'));
 app.use(express.static('public/css'));
 app.use(express.static('public/img'));
+app.use(express.static('public/json'));
 app.use(cookieParser(KEY));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
@@ -41,7 +42,7 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
 	userModel
-		.findOne({ name: req.body.name })
+		.findOne({ phone: req.body.phone })
 		.then((user) => {
 			if (user == null) {
 				new userModel({
@@ -54,7 +55,7 @@ app.post('/register', (req, res) => {
 				})
 					.save()
 					.then((user) => {
-						res.cookie('user', user.name, {
+						res.cookie('user', user.phone, {
 							signed: KEY,
 							maxAge: 7 * 24 * 3400,
 						});
@@ -66,9 +67,9 @@ app.post('/register', (req, res) => {
 						);
 					});
 			} else {
-				res.cookie('user', user.name, {
+				res.cookie('user', user.phone, {
 					signed: KEY,
-					maxAge: 864000,
+					maxAge: 7 * 24 * 3400,
 				});
 				res.redirect('/donate');
 			}
@@ -83,8 +84,13 @@ app.post('/donate', (req, res) => {
 		res.redirect('back');
 		return;
 	}
-	userModel.findOne({ name: req.signedCookies.user }, function(err, doc) {
+	userModel.findOne({ phone: req.signedCookies.user }, function(err, doc) {
 		if (err) res.send(err);
+		if (!doc) {
+			res.redirect('/logout');
+			console.error('WTF should not happen.');
+			return;
+		}
 		doc.amount += parseFloat(req.body.amount);
 		doc.save({
 			validateBeforeSave: true,
@@ -100,11 +106,11 @@ app.get('/donate', (req, res) => {
 	if (req.signedCookies.user) {
 		// Greet user and Ask how much to donate
 		userModel
-			.findOne({ name: req.signedCookies.user })
+			.findOne({ phone: req.signedCookies.user })
 			.then((user) => {
 				if (user == null) {
 					// Should not happen
-					console.log('WTF man');
+					console.error('WTF should not happen.');
 					res.redirect('/logout');
 				} else {
 					res.render('donate', {
@@ -116,7 +122,7 @@ app.get('/donate', (req, res) => {
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 				res.send(err.message);
 			});
 	} else {
@@ -136,8 +142,6 @@ app.get('/bank', (req, res) => {
 		}
 	}
 	if (req.query.city == undefined) req.query.city = '';
-	// if (req.query.zeros == undefined) req.query.zeros = 0;
-	// else req.query.zeros = -1;
 
 	var query = {
 		$and: [

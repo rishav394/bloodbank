@@ -42,7 +42,8 @@
 					<form action="/bank" autocomplete="off">
 						<div class="col l12 m12 s12">
 							<label class="black-text" for="blood">Blood Group</label>
-							<select name="blood" id="blood" class="validate" required>
+							<select name="blood" id="blood" class="validate">
+								<option value="">Any</option>
 								<option value="A">A</option>
 								<option value="B">B</option>
 								<option value="O">O</option>
@@ -54,11 +55,11 @@
 							<label class="black-text" for="rh">Rh Factor</label>
 							<p class="black-text">
 								<label>
-									<input class="with-gap black-text" value="+" name="rh" type="radio" checked />
+									<input class="with-gap black-text" value="+" name="rh" id="rh" type="radio" />
 									<span class="black-text">Positive</span>
 								</label>
 								<label>
-									<input class="with-gap black-text" value="-" name="rh" type="radio" />
+									<input class="with-gap black-text" value="-" name="rh" id="rh" type="radio" />
 									<span class="black-text">Negetive</span>
 								</label>
 							</p>
@@ -67,12 +68,6 @@
 							<input type="text" name="city" placeholder="City" id="city" class="validate">
 							<label for="city">City</label>
 						</div>
-						<!-- <div class="col l12 s12 m12 center">
-							<label>
-								<input type="checkbox" checked="checked" name="zeros" />
-								<span class="black-text">Include Zeros</span>
-							</label>
-						</div> -->
 						<div class="col l12 s12 m12 center">
 							<button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
 									class="material-icons">search</i></button>
@@ -105,11 +100,11 @@
 					<label class="white-text" for="rh">Rh Factor</label>
 					<p class=" white-text">
 						<label>
-							<input class="with-gap white-text white" value="+" name="rh" type="radio" />
+							<input class="with-gap white-text white" value="+" name="rh" id="rh" type="radio" />
 							<span class="white-text">Positive</span>
 						</label>
 						<label>
-							<input class="with-gap white-text white" value="-" name="rh" type="radio" />
+							<input class="with-gap white-text white" value="-" name="rh" id="rh" type="radio" />
 							<span class="white-text">Negetive</span>
 						</label>
 					</p>
@@ -118,12 +113,6 @@
 					<input type="text" name="city" placeholder="City" id="city" class="validate white-text">
 					<label for="city" class="white-text">City</label>
 				</div>
-				<!-- <div class="col l12 s12 m12 center">
-					<label>
-						<input class="white-text" type="checkbox" checked="checked" name="zeros" />
-						<span class="white-text">Include Zeros</span>
-					</label>
-				</div> -->
 				<div class="col l12 s12 m12 center">
 					<button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
 							class="material-icons">search</i></button>
@@ -133,6 +122,12 @@
 
 		<!-- Crap -->
 		<div class="row section">
+			<% if(docs.length == 0){ %>
+			<div class="container">
+				<p class="white-text flow-text">No Donors with that criteria found. Please redefine your
+					search.</p>
+			</div>
+			<%} else {%>
 			<% docs.forEach((doc)=>{ %>
 			<div class="col s12 m6 l4">
 				<div class="card red darken-1">
@@ -152,7 +147,7 @@
 					</div>
 				</div>
 			</div>
-			<% }) %>
+			<% })} %>
 		</div>
 		<!--Import Font Awesome-->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"

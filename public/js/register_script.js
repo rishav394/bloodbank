@@ -22,8 +22,21 @@ $.fn.ForceNumericOnly = function() {
 $('input').on('keyup', function() {
 	this.value = this.value.toUpperCase();
 });
+
 $('#phone').ForceNumericOnly();
+
+$.ajax({
+	type: 'GET',
+	url: '/cities.json',
+	success: function(response) {
+		response.forEach((city) => {
+			var o = new Option(city, city);
+			$(o).html(city);
+			$('#city').append(o);
+		});
+	},
+});
+
 $(document).ready(() => {
 	$('.sidenav').sidenav();
-	$('.dropdown-trigger').dropdown();
 });
