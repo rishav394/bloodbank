@@ -5,18 +5,17 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var mongoose = require('mongoose');
 var userModel = require('./models/user');
+require('dotenv').config();
 
-const KEY = 'Happy holi same to you.';
-// var dburi = 'mongodb://127.0.0.1:27017/bloodBank';
-var dburi =
-	'mongodb://rishav394:Pp%409845097056@ds263127.mlab.com:63127/bloodbank';
+const KEY = process.env.KEY;
+var dburi = process.env.DBURI;
 
 const escapeRegExp = (string) => {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
 mongoose.connect(dburi, { useNewUrlParser: true }, (err) => {
-	if (err) console.log(err);
+	if (err) throw err;
 	else console.log('Connected to mongoDb');
 });
 
@@ -56,7 +55,7 @@ app.post('/register', (req, res) => {
 					.save()
 					.then((user) => {
 						res.cookie('user', user.name, {
-							signed: dburi,
+							signed: KEY,
 							maxAge: 7 * 24 * 3400,
 						});
 						res.redirect('/donate');
@@ -68,7 +67,7 @@ app.post('/register', (req, res) => {
 					});
 			} else {
 				res.cookie('user', user.name, {
-					signed: dburi,
+					signed: KEY,
 					maxAge: 864000,
 				});
 				res.redirect('/donate');

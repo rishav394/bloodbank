@@ -86,4 +86,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Reports
 screenshots/17BCE2374 - IWPDA final.pdf
