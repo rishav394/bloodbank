@@ -1,5 +1,5 @@
-<div align="center">
-  <img src="https://image.flaticon.com/icons/png/128/2069/2069743.png">
+<div align="center"></a>
+  <img src="https://image.flaticon.com/icons/png/128/2069/2069743.png"></a>
   <h2>Blood Bank</h2>
 </div>
 
@@ -17,22 +17,20 @@ This is a simple Blood Bank Web Application I made for my assigment. Uses Node J
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
+- [Getting Started](#getting-started)
+- [Testing](#tests)
 - [Deployment](#deployment)
-- [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](#tests)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
-## 🧐 About
+## 🧐 About <a id="about"></a>
 
 Blood Bank is a very simple yet functional and secure Blood Bank Web Application.
 
 If you are familiar enough in a beginner level with `Node JS` and `mongoose` this is a good project to clone and try to replicate.
 
-## 🏁 Getting Started
+## 🏁 Getting Started <a id="getting-started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
@@ -73,11 +71,11 @@ Edit JSON files under `util` for dummy data
 npm run populate
 ```
 
-## 🔧 Running the tests
+## 🔧 Running the tests <a id="tests"></a>
 
-[ ] Still in todos
+Still in todos
 
-## 🚀 Deployment
+## 🚀 Deployment <a id="deployment"></a>
 
 Make changes in `.env`
 
@@ -86,7 +84,7 @@ Make changes in `.env`
 3. Change NODE_ENV to production for `Morgan`
 4. Remove everything after `DEBUG=`
 
-## ⛏️ Built Using
+## ⛏️ Built Using <a id="built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Mongoose](https://mongoosejs.com/) - MongoDB Wrapper
@@ -94,13 +92,13 @@ Make changes in `.env`
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 - [VS Code](https://code.visualstudio.com/) - Aesme IDE
 
-## ✍️ Authors
+## ✍️ Authors <a id="authors"></a>
 
 [@rishav394](https://github.com/rishav394) - Initial work
 
 See also the list of [contributors](https://github.com/rishav394/bloodbank/graphs/contributors) who participated in this project.
 
-## 🎉 Acknowledgements
+## 🎉 Acknowledgements <a id="acknowledgement"></a>
 
 - Hat tip to anyone whose code was used
 - StackOverflow <3
