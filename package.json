@@ -1,10 +1,11 @@
 {
 	"name": "bloodbank",
-	"version": "1.0.0",
-	"description": "IWP DA1",
+	"version": "1.6.1",
+	"description": "A simple yet functional and secure Blood Bank Web Application I made for my assigment. Uses Node JS and MongoDB primarily. If you are familiar enough in a beginner level with Node JS and mongoose this is a good project to clone and try to replicate.",
 	"main": "index.js",
-	"author": "17bce2374",
+	"author": "rishav394",
 	"scripts": {
+		"test": "echo 'Error: no test specified'",
 		"start": "node index.js",
 		"populate": "node util/populator.js"
 	},
