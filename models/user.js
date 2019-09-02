@@ -4,7 +4,7 @@ var mySchema = new schema(
 	{
 		name: {
 			type: String,
-			required: [true, 'Need your stupid name mate.'],
+			required: [true, 'Need your name mate.'],
 			uppercase: true,
 			trim: true,
 		},
@@ -28,14 +28,14 @@ var mySchema = new schema(
 			trim: true,
 		},
 		phone: {
-			type: Number,
-			validate: {
-				validator: Number.isInteger,
-				message: (props) =>
-					`${props.value} is not a valid phone number!`,
+			type: String,
+			required: [true, 'Phone number is required.'],
+			validate:{
+				validator: function(v){
+					return /\d{10}/.test(v);
+				},
+		      message: props => `${props.value} is not a valid phone number!`
 			},
-			required: [true, 'Need your stupid number mate.'],
-			max: 9999999999,
 			unique: true,
 		},
 		amount: {

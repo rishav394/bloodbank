@@ -1,3 +1,6 @@
+require('dotenv').config();
+var debug = require('debug')('http');
+var morgan = require('morgan');
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -5,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var mongoose = require('mongoose');
 var userModel = require('./models/user');
-require('dotenv').config();
 
 const KEY = process.env.KEY;
 const dburi = process.env.DBURI;
@@ -16,6 +18,8 @@ const signature = {
 const escapeRegExp = (string) => {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
+
+app.use(morgan('dev'));
 
 mongoose.connect(
 	dburi,
@@ -48,6 +52,7 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
+	debug(req.body);
 	userModel
 		.findOne({ phone: req.body.phone })
 		.then((user) => {
@@ -104,6 +109,7 @@ app.post('/donate', (req, res) => {
 });
 
 app.get('/donate', (req, res) => {
+	debug(req.signedCookies);
 	if (req.signedCookies.user) {
 		// Greet user and Ask how much to donate
 		userModel
@@ -114,10 +120,19 @@ app.get('/donate', (req, res) => {
 					console.error('WTF should not happen.');
 					res.redirect('/logout');
 				} else {
+					debug(
+						user.createdAt,
+						user.updatedAt,
+						user.createdAt - user.updatedAt,
+					);
 					res.render('donate', {
 						user: {
 							name: user.name,
 							amount: user.amount,
+							lastDonated:
+								user.createdAt - user.updatedAt == 0
+									? 'Never.'
+									: user.updatedAt,
 						},
 					});
 				}
@@ -146,17 +161,31 @@ app.get('/bank', (req, res) => {
 
 	if (req.query.city == undefined) req.query.city = '';
 
+	var page = req.query.page;
+	if (page === undefined || page < 1) page = 1;
+
 	var query = {
 		$and: [
 			{ bloodGroup: { $regex: req.query.blood, $options: 'i' } },
 			{ city: { $regex: req.query.city, $options: 'i' } },
-			// { amount: { $ne: req.query.zeros } },
 		],
 	};
-	userModel.find(query, function(err, docs) {
-		if (err) res.send(err);
-		res.render('bank', { docs: docs, logged: req.signedCookies.user });
-	});
+
+	userModel.find(
+		query,
+		null,
+		{
+			sort: {
+				amount: -1,
+			},
+			limit: 18,
+			skip: (page - 1) * 18,
+		},
+		function(err, docs) {
+			if (err) res.send(err);
+			res.render('bank', { docs: docs, logged: req.signedCookies.user });
+		},
+	);
 });
 
 app.get('/logout', (req, res) => {
