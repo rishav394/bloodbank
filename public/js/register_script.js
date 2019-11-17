@@ -6,14 +6,14 @@ $.fn.ForceNumericOnly = function() {
       // home, end, period, and numpad decimal
       return (
         key == 8 ||
-				key == 9 ||
-				key == 13 ||
-				key == 46 ||
-				key == 110 ||
-				key == 190 ||
-				(key >= 35 && key <= 40) ||
-				(key >= 48 && key <= 57) ||
-				(key >= 96 && key <= 105)
+        key == 9 ||
+        key == 13 ||
+        key == 46 ||
+        key == 110 ||
+        key == 190 ||
+        (key >= 35 && key <= 40) ||
+        (key >= 48 && key <= 57) ||
+        (key >= 96 && key <= 105)
       );
     });
   });

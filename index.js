@@ -88,15 +88,15 @@ app.post('/donate', (req, res) => {
     res.redirect('back');
     return;
   }
-  userModel.findOne({ phone: req.signedCookies.user }, function(err, doc) {
+  userModel.findOne({ phone: req.signedCookies.user }, function(err, user) {
     if (err) res.send(err);
-    if (!doc) {
+    if (!user) {
       res.redirect('/logout');
       console.error('WTF should not happen.');
       return;
     }
-    doc.amount += parseFloat(req.body.amount);
-    doc
+    user.amount += parseFloat(req.body.amount);
+    user
       .save({
         validateBeforeSave: true,
       })
@@ -108,7 +108,7 @@ app.post('/donate', (req, res) => {
 });
 
 app.get('/donate', (req, res) => {
-  debug(req.signedCookies);
+  debug(req.signedCookies.user);
   if (req.signedCookies.user) {
     // Greet user and Ask how much to donate
     userModel
@@ -129,9 +129,9 @@ app.get('/donate', (req, res) => {
               name: user.name,
               amount: user.amount,
               lastDonated:
-								user.createdAt - user.updatedAt == 0
-								  ? 'Never.'
-								  : user.updatedAt,
+                user.createdAt - user.updatedAt == 0
+                  ? 'Never.'
+                  : user.updatedAt,
             },
           });
         }
