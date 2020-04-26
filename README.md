@@ -89,7 +89,7 @@ Make changes in `.env`
 - [Mongoose](https://mongoosejs.com/) - MongoDB Wrapper
 - [Express](https://expressjs.com/) - Server Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
-- [VS Code](https://code.visualstudio.com/) - Aesme IDE
+- [VS Code](https://code.visualstudio.com/) - Awesome IDE
 
 ## ✍️ Authors
 
