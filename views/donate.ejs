@@ -1,63 +1,89 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="Description"
+      content="Author: Rishav Rungta, Purpose: I made this site as a larning project and will try and use react soon."
+    />
+    <title>BloodBank</title>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="Description"
-			content="Author: Rishav Rungta, Purpose: I made this site as a larning project and will try and use react soon.">
-		<title>BloodBank</title>
+    <!-- Compiled latest Css -->
+    <link rel="stylesheet" href="materialize.min.css" />
 
-		<!-- Compiled latest Css -->
-		<link rel="stylesheet" href="materialize.min.css" />
+    <!--Import Google Icon Font-->
+    <link href="icon.css" rel="stylesheet" />
 
-		<!--Import Google Icon Font-->
-		<link href="icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="donate.css" />
+  </head>
 
-		<link rel="stylesheet" href="donate.css">
-	</head>
+  <body>
+    <!-- Nav -->
+    <nav class="mynav">
+      <div class="nav-wrapper container">
+        <a href="/"
+          ><img src="bbi-logo.png" alt="Universe" class="brand-logo"
+        /></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="btn transparent" href="/bank">Check Donors</a></li>
+          <li><a class="btn transparent" href="/logout">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
 
-	<body>
-		<!-- Nav -->
-		<nav class="mynav">
-			<div class="nav-wrapper container">
-				<a href="/"><img src="bbi-logo.png" alt="Universe" class="brand-logo"></a>
-				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a class="btn transparent" href="/bank">Check Donors</a></li>
-					<li><a class="btn transparent" href="/logout">Log Out</a></li>
-				</ul>
-			</div>
-		</nav>
+    <ul class="sidenav" id="mobile-demo">
+      <li>
+        <a class="btn red" href="/bank?blood=&city=&zeros=on">Check Donors</a>
+      </li>
+      <li><a class="btn red" href="/logout">Log Out</a></li>
+    </ul>
 
-		<ul class="sidenav" id="mobile-demo">
-			<li><a class="btn red" href="/bank?blood=&city=&zeros=on">Check Donors</a></li>
-			<li><a class="btn red" href="/logout">Log Out</a></li>
-		</ul>
+    <!-- Crap -->
+    <div class="center flow-text">
+      <h4 class="indigo-text">Welcome <%= user.name %>.</h4>
+      <p>
+        You have donated <span class="pink-text"><%= user.amount %></span> Pint
+        blood so far.
+      </p>
+    </div>
+    <div class="row center">
+      <form action="/donate" method="post" id="amountForm">
+        <input
+          required
+          id="amount"
+          name="amount"
+          type="number"
+          max="5"
+          value="0"
+          class="browser-default"
+        />
+        <span class="red-text">P</span><br />
+        <a
+          onclick="document.getElementById('amountForm').submit();"
+          class="btn-floating btn-large waves-effect waves-light red"
+          ><i class="material-icons">add</i></a
+        >
+      </form>
 
-		<!-- Crap -->
-		<div class="center flow-text">
-			<h4 class="indigo-text">Welcome <%= user.name %>. </h4>
-			<p>You have donated <span class="pink-text"><%= user.amount %></span> Pint blood so far.</p>
-		</div>
-		<div class="row center">
-			<form action="/donate" method="post" id="amountForm">
-				<input required id="amount" name="amount" type="number" max="5" value="0" class="browser-default">
-				<span class="red-text">P</span><br>
-				<a onclick="document.getElementById('amountForm').submit();"
-					class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-			</form>
+      <h3 class="indigo-text container flow-text">
+        Last donated <%= user.lastDonated %>
+      </h3>
+    </div>
 
-			<h3 class="indigo-text container flow-text">Last donated <%= user.lastDonated %></h3>
-		</div>
-
-		<!--Import Font Awesome-->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-			integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
-		<%- include footer.ejs %>
-		<script src="jquery.min.js"></script>
-		<script src="materialize.min.js"></script>
-		<script src="donate.js"></script>
-	</body>
-
+    <!--Import Font Awesome-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <%- include footer.ejs %>
+    <script src="jquery.min.js"></script>
+    <script src="materialize.min.js"></script>
+    <script src="donate.js"></script>
+  </body>
 </html>

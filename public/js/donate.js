@@ -9,6 +9,6 @@ function resizeInput() {
   if (this.value.length >= 1) this.style.width = this.value.length + 0.5 + 'ch';
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('.sidenav').sidenav();
 });

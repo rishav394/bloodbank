@@ -27,7 +27,7 @@ mongoose.connect(
   (err) => {
     if (err) throw err;
     else console.log('Connected to mongoDb');
-  },
+  }
 );
 
 app.use(express.static('public/js'));
@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  }),
+  })
 );
 
 app.get('/', (req, res) => {
@@ -88,7 +88,7 @@ app.post('/donate', (req, res) => {
     res.redirect('back');
     return;
   }
-  userModel.findOne({ phone: req.signedCookies.user }, function(err, user) {
+  userModel.findOne({ phone: req.signedCookies.user }, function (err, user) {
     if (err) res.send(err);
     if (!user) {
       res.redirect('/logout');
@@ -122,7 +122,7 @@ app.get('/donate', (req, res) => {
           debug(
             user.createdAt,
             user.updatedAt,
-            user.createdAt - user.updatedAt,
+            user.createdAt - user.updatedAt
           );
           res.render('donate', {
             user: {
@@ -179,10 +179,10 @@ app.get('/bank', (req, res) => {
       limit: 18,
       skip: (page - 1) * 18,
     },
-    function(err, docs) {
+    function (err, docs) {
       if (err) res.send(err);
       res.render('bank', { docs: docs, logged: req.signedCookies.user });
-    },
+    }
   );
 });
 

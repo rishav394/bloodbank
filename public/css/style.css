@@ -1,46 +1,46 @@
 .brand-logo {
-	height: 90%;
+  height: 90%;
 }
 
 .mynav {
-	background-color: rgba(252, 34, 49, 0.979);
+  background-color: rgba(252, 34, 49, 0.979);
 }
 
 footer {
-	margin-top: 30px;
+  margin-top: 30px;
 }
 
 body footer.page-footer {
-	background-color: rgba(252, 34, 49, 0.979);
+  background-color: rgba(252, 34, 49, 0.979);
 }
 
 body {
-	background-color: rgb(229, 22, 38);
+  background-color: rgb(229, 22, 38);
 }
 
 .row {
-	margin-bottom: 2px;
+  margin-bottom: 2px;
 }
 
 h3 {
-	color: #9f190c;
+  color: #9f190c;
 }
 
 div.card div.card-content {
-	padding-bottom: 0.1em;
-	padding-top: 0.6rem;
+  padding-bottom: 0.1em;
+  padding-top: 0.6rem;
 }
 
 select {
-	display: inherit;
+  display: inherit;
 }
 
 #final {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 div div input#phone,
 div div input#first_name,
 div div input#address {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
